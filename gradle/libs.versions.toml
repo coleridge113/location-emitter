@@ -1,4 +1,5 @@
 [versions]
+ablyJava = "1.4.2"
 agp = "8.13.1"
 converterGson = "3.0.0"
 koinAndroid = "4.1.1"
@@ -19,6 +20,7 @@ navigationCompose = "2.9.6"
 retrofit = "3.0.0"
 
 [libraries]
+ably-java = { module = "io.ably:ably-java", version.ref = "ablyJava" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationCompose" }
