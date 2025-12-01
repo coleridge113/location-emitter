@@ -17,7 +17,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.luna.base_jetpack_compose"
+        applicationId = "com.luna.location_emitter"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -39,6 +39,31 @@ android {
             "String",
             "ABLY_API_KEY",
             "\"${localProps["ABLY_API_KEY"]}\""
+        )
+        buildConfigField(
+            "String",
+            "PUSHER_APP_ID",
+            "\"${localProps["PUSHER_APP_ID"]}\""
+        )
+        buildConfigField(
+            "String",
+            "PUSHER_KEY",
+            "\"${localProps["PUSHER_KEY"]}\""
+        )
+        buildConfigField(
+            "String",
+            "PUSHER_SECRET",
+            "\"${localProps["PUSHER_SECRET"]}\""
+        )
+        buildConfigField(
+            "String",
+            "PUSHER_API_KEY",
+            "\"${localProps["PUSHER_API_KEY"]}\""
+        )
+        buildConfigField(
+            "String",
+            "PUSHER_CLUSTER",
+            "\"${localProps["PUSHER_CLUSTER"]}\""
         )
     }
 

@@ -7,25 +7,25 @@ import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-private const val CHANNEL_NAME = "ably-channel"
-private const val EVENT_NAME = "ably-route"
+private const val ABLY_CHANNEL_NAME = "ably-channel"
+private const val ABLY_EVENT_NAME = "ably-route"
 
 class RouteEmitter(private val context: Context) {
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     private val channel: Channel by lazy {
-        Ably.realtime.channels.get(CHANNEL_NAME).also { ch ->
+        Ably.realtime.channels.get(ABLY_CHANNEL_NAME).also { ch ->
             ch.on { stateChange ->
                 Log.d(
                     TAG,
-                    "Android Channel[$CHANNEL_NAME] state: ${stateChange.previous} -> ${stateChange.current}" +
+                    "Android Channel[$ABLY_CHANNEL_NAME] state: ${stateChange.previous} -> ${stateChange.current}" +
                         (stateChange.reason?.let { " reason=${it.message}" } ?: "")
                 )
             }
         }
     }
-
+    
     private val route: List<Pair<Double, Double>> by lazy { loadRoutePoints() }
 
     @Volatile
@@ -58,8 +58,11 @@ class RouteEmitter(private val context: Context) {
                 )
 
                 try {
-                    channel.publish(EVENT_NAME, payload.toString())
-                    Log.d(TAG, "Published seq=$idx lng=$lng lat=$lat to $CHANNEL_NAME/$EVENT_NAME")
+                    channel.publish(ABLY_EVENT_NAME, payload.toString())
+                    if (PusherClient.subscribedChannel?.isSubscribed == true) {
+                        PusherClient.triggerClientEvent(payload.toString())
+                    }
+                    Log.d(TAG, "Published seq=$idx lng=$lng lat=$lat to $ABLY_CHANNEL_NAME/$ABLY_EVENT_NAME")
                 } catch (e: Exception) {
                     Log.e(TAG, "Exception while publishing: ${e.message}", e)
                 }

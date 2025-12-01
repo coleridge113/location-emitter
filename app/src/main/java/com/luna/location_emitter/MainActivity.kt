@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import com.luna.location_emitter.presentation.MainScreen
 import com.luna.location_emitter.ui.theme.LocationEmitterTheme
 import com.luna.location_emitter.utils.Ably
+import com.luna.location_emitter.utils.PusherClient
 import com.luna.location_emitter.utils.RouteEmitter
 import io.ably.lib.realtime.Channel
 
@@ -23,6 +24,7 @@ class MainActivity : ComponentActivity() {
         val routeEmitter = RouteEmitter(this)
 
         val channel: Channel = Ably.realtime.channels.get("ably-channel")
+        PusherClient.connectAndSubscribe()
         channel.subscribe("ably-route") { msg ->
             Log.d(
                 "AblyStuff",
