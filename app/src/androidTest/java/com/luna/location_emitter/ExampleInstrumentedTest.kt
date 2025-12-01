@@ -1,4 +1,4 @@
-package com.luna.base_jetpack_compose
+package com.luna.location_emitter
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

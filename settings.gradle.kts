@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "base-jetpack-compose"
+rootProject.name = "location-emitter"
 include(":app")
  

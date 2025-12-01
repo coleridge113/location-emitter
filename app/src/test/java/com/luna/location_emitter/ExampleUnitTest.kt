@@ -1,4 +1,4 @@
-package com.luna.base_jetpack_compose
+package com.luna.location_emitter
 
 import org.junit.Test
 

@@ -1,6 +1,6 @@
-package com.luna.base_jetpack_compose.utils
+package com.luna.location_emitter.utils
 
-import com.luna.base_jetpack_compose.BuildConfig
+import com.luna.location_emitter.BuildConfig
 import android.util.Log
 import io.ably.lib.realtime.AblyRealtime
 import io.ably.lib.realtime.Channel

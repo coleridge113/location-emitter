@@ -13,7 +13,7 @@ val localProps = File(rootDir, "local.properties").inputStream().use {
 }
 
 android {
-    namespace = "com.luna.base_jetpack_compose"
+    namespace = "com.luna.location_emitter"
     compileSdk = 36
 
     defaultConfig {
@@ -105,4 +105,7 @@ dependencies {
 
     // Ably
     implementation(libs.ably.java)
+
+    // Pusher
+    implementation(libs.pusher.java.client)
 }

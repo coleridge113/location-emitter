@@ -1,4 +1,4 @@
-package com.luna.base_jetpack_compose.presentation
+package com.luna.location_emitter.presentation
 
 
 import androidx.compose.foundation.layout.Column

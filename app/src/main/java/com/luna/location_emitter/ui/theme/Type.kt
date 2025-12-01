@@ -1,4 +1,4 @@
-package com.luna.base_jetpack_compose.ui.theme
+package com.luna.location_emitter.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -1,4 +1,4 @@
-package com.luna.base_jetpack_compose.utils
+package com.luna.location_emitter.utils
 
 import android.content.Context
 import android.util.Log
@@ -88,7 +88,7 @@ class RouteEmitter(private val context: Context) {
     private fun loadRoutePoints(): List<Pair<Double, Double>> {
         val result = mutableListOf<Pair<Double, Double>>()
         return try {
-            val inputStream = context.assets.open("location_data.txt")
+            val inputStream = context.assets.open("location_data.txt1")
             val reader = BufferedReader(InputStreamReader(inputStream))
 
             reader.useLines { lines ->

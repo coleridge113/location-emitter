@@ -1,4 +1,4 @@
-package com.luna.base_jetpack_compose
+package com.luna.location_emitter
 
 import android.os.Bundle
 import android.util.Log
@@ -9,10 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.luna.base_jetpack_compose.presentation.MainScreen
-import com.luna.base_jetpack_compose.ui.theme.BasejetpackcomposeTheme
-import com.luna.base_jetpack_compose.utils.Ably
-import com.luna.base_jetpack_compose.utils.RouteEmitter
+import com.luna.location_emitter.presentation.MainScreen
+import com.luna.location_emitter.ui.theme.LocationEmitterTheme
+import com.luna.location_emitter.utils.Ably
+import com.luna.location_emitter.utils.RouteEmitter
 import io.ably.lib.realtime.Channel
 
 class MainActivity : ComponentActivity() {
@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
         channel.publish("ably-route", "Hello Android!")
 
         setContent {
-            BasejetpackcomposeTheme {
+            LocationEmitterTheme {
                 Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
                     MainScreen(
                         modifier = Modifier.padding(innerPadding),
