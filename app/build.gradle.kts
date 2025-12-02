@@ -67,7 +67,28 @@ android {
         )
     }
 
-    buildTypes {
+    flavorDimensions += "environment"
+    productFlavors {
+        create("emulator") {
+            isDefault = true
+            dimension = "environment"
+            buildConfigField(
+                "String",
+                "PUSHER_AUTH_BASE_URL",
+                "\"http://10.0.2.2:3000\""
+            )
+        }
+        create("device") {
+            dimension = "environment"
+            buildConfigField(
+                "String",
+                "PUSHER_AUTH_BASE_URL",
+                "\"http://192.168.100.70:3000\""
+            )
+        }
+    }
+
+   buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -127,6 +148,11 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.navigation.compose)
+
+    // Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
     // Ably
     implementation(libs.ably.java)
