@@ -63,6 +63,7 @@ object PusherClient {
     }
 
     val pusher: Pusher = Pusher(BuildConfig.PUSHER_KEY, options)
+    var onResubscribed: (() -> Unit)? = null
 
     @Volatile
     var subscribedChannel: PrivateChannel? = null
@@ -97,6 +98,7 @@ object PusherClient {
             object : PrivateChannelEventListener {
                 override fun onSubscriptionSucceeded(channelName: String?) {
                     Log.d(TAG, "Subscribed to Pusher channel: $channelName")
+                    onResubscribed?.invoke()
                 }
 
                 override fun onEvent(event: PusherEvent?) {

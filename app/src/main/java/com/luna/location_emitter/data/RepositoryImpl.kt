@@ -3,12 +3,17 @@ package com.luna.location_emitter.data
 class RepositoryImpl : Repository {
 
     private val db = DatabaseProvider.get()
+    private val dao = db.locationDao()
 
     override suspend fun insertLocationData(entity: LocationEntity) {
-        db.locationDao().insertLocationData(entity)
+        dao.insertLocationData(entity)
     }
 
     override suspend fun getLocationData(): List<LocationEntity> {
-        return db.locationDao().getLocationData()
+        return dao.getLocationData()
+    }
+
+    override suspend fun flushDB() {
+        return dao.flushDB()
     }
 }

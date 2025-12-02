@@ -12,4 +12,8 @@ interface LocationDao {
 
     @Query("SELECT * FROM location ORDER BY timestamp ASC")
     suspend fun getLocationData(): List<LocationEntity>
+
+    @Query("DELETE FROM location")
+    suspend fun flushDB()
+
 }

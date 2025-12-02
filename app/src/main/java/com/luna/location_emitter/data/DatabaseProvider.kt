@@ -1,7 +1,11 @@
 package com.luna.location_emitter.data
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Room
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 object DatabaseProvider {
 
