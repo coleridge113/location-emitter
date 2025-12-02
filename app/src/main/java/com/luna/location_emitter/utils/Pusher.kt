@@ -23,8 +23,8 @@ object PusherClient {
     const val EVENT_NAME = "client-psher-route"
     const val TAG = "PusherClient"
 
-    private const val AUTH_URL = "http://192.168.100.70:3000/pusher/auth"
-    // private const val AUTH_URL = "http://10.0.0.2.2:3000/pusher/auth"
+    private const val AUTH_PATH = "/pusher/auth"
+    private const val AUTH_URL = "${BuildConfig.PUSHER_AUTH_BASE_URL}$AUTH_PATH"
     private val httpClient = OkHttpClient()
     private val options: PusherOptions = PusherOptions().apply {
         setCluster(BuildConfig.PUSHER_CLUSTER)
