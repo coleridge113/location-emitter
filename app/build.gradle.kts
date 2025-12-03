@@ -65,6 +65,16 @@ android {
             "PUSHER_CLUSTER",
             "\"${localProps["PUSHER_CLUSTER"]}\""
         )
+        buildConfigField(
+            "String",
+            "RADAR_TEST_SECRET",
+            "\"${localProps["RADAR_TEST_SECRET"]}\""
+        )
+        buildConfigField(
+            "String",
+            "RADAR_TEST_PUBLISHABLE",
+            "\"${localProps["RADAR_TEST_PUBLISHABLE"]}\""
+        )
     }
 
     flavorDimensions += "environment"
