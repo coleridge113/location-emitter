@@ -110,6 +110,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlin {
         compilerOptions {
@@ -169,4 +170,14 @@ dependencies {
 
     // Pusher
     implementation(libs.pusher.java.client)
+
+    // Radar
+    implementation(libs.sdk)
+
+    // Desugaring
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+
+    // Google Play Services Location
+    implementation(libs.firebase.messaging)
+    implementation(libs.play.services.location)
 }

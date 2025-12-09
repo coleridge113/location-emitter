@@ -20,10 +20,18 @@ navigationCompose = "2.9.6"
 pusherJavaClient = "2.4.4"
 retrofit = "3.0.0"
 roomRuntime = "2.8.4"
+sdk = "3.24.0"
+desugar_jdk_libs = "2.1.5"
+firebaseMessaging = "25.0.1"
+playServicesLocation = "21.3.0"
+playServicesLocationVersion = "21.3.0"
 
 [libraries]
+firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebaseMessaging" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocationVersion" }
 ably-java = { module = "io.ably:ably-java", version.ref = "ablyJava" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationCompose" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationCompose" }
@@ -52,6 +60,7 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 pusher-java-client = { module = "com.pusher:pusher-java-client", version.ref = "pusherJavaClient" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+sdk = { module = "io.radar:sdk", version.ref = "sdk" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
