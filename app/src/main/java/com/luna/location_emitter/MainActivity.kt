@@ -5,16 +5,19 @@ import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresPermission
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.remember
 import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.LocationRequest
 import com.luna.location_emitter.data.DatabaseProvider
 import com.luna.location_emitter.data.RepositoryImpl
 import com.luna.location_emitter.presentation.MainScreen
@@ -23,6 +26,10 @@ import com.luna.location_emitter.utils.Ably
 import com.luna.location_emitter.utils.PusherClient
 import com.luna.location_emitter.utils.RouteEmitter
 import com.luna.location_emitter.utils.radar.MyRadarReceiver
+import com.google.android.gms.location.Priority
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import io.ably.lib.realtime.Channel
 import io.radar.sdk.Radar
 import io.radar.sdk.RadarInitializeOptions
@@ -31,6 +38,7 @@ class MainActivity : ComponentActivity() {
     private val foregroundLocationPermissionsRequestCode = 1
     private val backgroundLocationPermissionsRequestCode = 2
 
+    @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -47,7 +55,19 @@ class MainActivity : ComponentActivity() {
         )
 
         requestLocationPermissions()
-
+        
+        val request = LocationRequest.Builder(
+            Priority.PRIORITY_HIGH_ACCURACY,
+            1000L
+        ).build()
+        val client = LocationServices.getFusedLocationProviderClient(this)
+        client.requestLocationUpdates(
+            request,
+            object : LocationCallback() {
+                override fun onLocationResult(result: LocationResult) {}
+            },
+            Looper.getMainLooper()
+        )
         setContent {
             val repository = RepositoryImpl()
             val routeEmitter = RouteEmitter(

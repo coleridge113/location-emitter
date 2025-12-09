@@ -9,6 +9,7 @@ import com.luna.location_emitter.data.RepositoryImpl
 import com.pusher.client.connection.ConnectionState
 import io.ably.lib.realtime.Channel
 import io.radar.sdk.Radar
+import io.radar.sdk.RadarTrackingOptions
 import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -53,8 +54,10 @@ class RouteEmitter(
             return
         }
 
+        Radar.setUserId("metromart-user1")
         publishing = true
         job = scope.launch {
+            Radar.startTracking(RadarTrackingOptions.CONTINUOUS)
             var idx = 0
             while (isActive && publishing && idx < route.size) {
                 val (lng, lat) = route[idx]
@@ -66,13 +69,12 @@ class RouteEmitter(
                         time = System.currentTimeMillis()
                     }
 
-                    Radar.setUserId("metromart-user")
-                    Radar.trackOnce(loc) { status, location, events, user ->
-                        Log.d("Radar", "STATUS: $status")
-                        Log.d("Radar", "LOCATION: $location")
-                        Log.d("Radar", "EVENTS: $events")
-                        Log.d("Radar", "USER: ${user?.userId}")
-                    }
+                    // Radar.trackOnce(loc) { status, location, events, user ->
+                    //     Log.d("Radar", "STATUS: $status")
+                    //     Log.d("Radar", "LOCATION: $location")
+                    //     Log.d("Radar", "EVENTS: $events")
+                    //     Log.d("Radar", "USER: ${user?.userId}")
+                    // }
                 } catch (e: Exception) {
                     Log.e(TAG, "Exception while publishing: ${e.message}", e)
                 }
