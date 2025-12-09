@@ -2,11 +2,13 @@ package com.luna.location_emitter.utils
 
 import android.content.Context
 import android.util.Log
+import android.location.Location
 import com.luna.location_emitter.data.AppDatabase
 import com.luna.location_emitter.data.LocationEntity
 import com.luna.location_emitter.data.RepositoryImpl
 import com.pusher.client.connection.ConnectionState
 import io.ably.lib.realtime.Channel
+import io.radar.sdk.Radar
 import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -53,26 +55,23 @@ class RouteEmitter(
 
         publishing = true
         job = scope.launch {
-            repository.flushDB()
-            delay(1000L)
             var idx = 0
             while (isActive && publishing && idx < route.size) {
                 val (lng, lat) = route[idx]
-                val payload: Map<String, Any> = mapOf(
-                    "type" to "point",
-                    "seq" to idx,
-                    "lng" to lng,
-                    "lat" to lat,
-                    "ts" to System.currentTimeMillis()
-                )
-
                 try {
-                    channel.publish(ABLY_EVENT_NAME, payload.toString())
-                    if (PusherClient.subscribedChannel?.isSubscribed == true) {
-                        publishPusher(payload)
+                    val loc = Location("mock").apply {
+                        latitude = lat
+                        longitude = lng
+                        accuracy = 5f
+                        time = System.currentTimeMillis()
                     }
-                    Log.d("PusherConnection", "Connection state: ${PusherClient.pusher.connection.state}")
-                    Log.d(TAG, "Published seq=$idx lng=$lng lat=$lat to $ABLY_CHANNEL_NAME/$ABLY_EVENT_NAME")
+
+                    Radar.trackOnce(loc) { status, location, events, user ->
+                        Log.d("Radar", "STATUS: $status")
+                        Log.d("Radar", "LOCATION: $location")
+                        Log.d("Radar", "EVENTS: $events")
+                        Log.d("Radar", "USER: $user")
+                    }
                 } catch (e: Exception) {
                     Log.e(TAG, "Exception while publishing: ${e.message}", e)
                 }
