@@ -66,11 +66,12 @@ class RouteEmitter(
                         time = System.currentTimeMillis()
                     }
 
+                    Radar.setUserId("metromart-user")
                     Radar.trackOnce(loc) { status, location, events, user ->
                         Log.d("Radar", "STATUS: $status")
                         Log.d("Radar", "LOCATION: $location")
                         Log.d("Radar", "EVENTS: $events")
-                        Log.d("Radar", "USER: $user")
+                        Log.d("Radar", "USER: ${user?.userId}")
                     }
                 } catch (e: Exception) {
                     Log.e(TAG, "Exception while publishing: ${e.message}", e)
