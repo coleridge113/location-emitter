@@ -20,12 +20,13 @@ import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.LocationRequest
 import com.luna.location_emitter.data.DatabaseProvider
 import com.luna.location_emitter.data.RepositoryImpl
-import com.luna.location_emitter.presentation.MainScreen
+import com.luna.location_emitter.presentation.ButtonScreen
 import com.luna.location_emitter.ui.theme.LocationEmitterTheme
 import com.luna.location_emitter.utils.Ably
 import com.luna.location_emitter.utils.PusherClient
 import com.luna.location_emitter.utils.RouteEmitter
 import com.luna.location_emitter.utils.radar.MyRadarReceiver
+import com.luna.location_emitter.utils.os.requestPriorityGPS
 import com.google.android.gms.location.Priority
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationCallback
@@ -55,19 +56,8 @@ class MainActivity : ComponentActivity() {
         )
 
         requestLocationPermissions()
-        
-        val request = LocationRequest.Builder(
-            Priority.PRIORITY_HIGH_ACCURACY,
-            1000L
-        ).build()
-        val client = LocationServices.getFusedLocationProviderClient(this)
-        client.requestLocationUpdates(
-            request,
-            object : LocationCallback() {
-                override fun onLocationResult(result: LocationResult) {}
-            },
-            Looper.getMainLooper()
-        )
+        requestPriorityGPS(this) 
+
         setContent {
             val repository = RepositoryImpl()
             val routeEmitter = RouteEmitter(
@@ -89,7 +79,7 @@ class MainActivity : ComponentActivity() {
             }
             LocationEmitterTheme {
                 Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
-                    MainScreen(
+                    ButtonScreen(
                         modifier = Modifier.padding(innerPadding),
                         onStartEmitting = { routeEmitter.start() },
                         onStopEmitting = { routeEmitter.stop() }

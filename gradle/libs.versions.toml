@@ -25,9 +25,13 @@ desugar_jdk_libs = "2.1.5"
 firebaseMessaging = "25.0.1"
 playServicesLocation = "21.3.0"
 playServicesLocationVersion = "21.3.0"
+androidSdk = "12.2.1"
+androidPluginAnnotationV9 = "3.0.2"
 
 [libraries]
 firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebaseMessaging" }
+android-sdk = { module = "org.maplibre.gl:android-sdk", version.ref = "androidSdk" }
+android-plugin-annotation-v9 = { module = "org.maplibre.gl:android-plugin-annotation-v9", version.ref = "androidPluginAnnotationV9" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocationVersion" }
 ably-java = { module = "io.ably:ably-java", version.ref = "ablyJava" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

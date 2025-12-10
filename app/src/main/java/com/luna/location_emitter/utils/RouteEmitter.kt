@@ -54,7 +54,7 @@ class RouteEmitter(
             return
         }
 
-        Radar.setUserId("metromart-user1")
+        Radar.setUserId("metromart-user2")
         publishing = true
         job = scope.launch {
             Radar.startTracking(RadarTrackingOptions.CONTINUOUS)

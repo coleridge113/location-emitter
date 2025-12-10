@@ -180,4 +180,8 @@ dependencies {
     // Google Play Services Location
     implementation(libs.firebase.messaging)
     implementation(libs.play.services.location)
+
+    // MapLibre
+    implementation(libs.android.sdk )
+    implementation(libs.android.plugin.annotation.v9)
 }

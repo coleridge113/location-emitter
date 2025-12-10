@@ -1,6 +1,5 @@
 package com.luna.location_emitter.presentation
 
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Arrangement
@@ -17,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 
 @Composable
-fun MainScreen(
+fun ButtonScreen(
     modifier: Modifier,
     onStartEmitting: () -> Unit,
     onStopEmitting: () -> Unit
