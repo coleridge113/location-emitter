@@ -22,16 +22,15 @@ import com.luna.location_emitter.data.DatabaseProvider
 import com.luna.location_emitter.data.RepositoryImpl
 import com.luna.location_emitter.presentation.ButtonScreen
 import com.luna.location_emitter.ui.theme.LocationEmitterTheme
-import com.luna.location_emitter.utils.Ably
 import com.luna.location_emitter.utils.PusherClient
 import com.luna.location_emitter.utils.RouteEmitter
 import com.luna.location_emitter.utils.radar.MyRadarReceiver
+import com.luna.location_emitter.utils.radar.RadarTrip
 import com.luna.location_emitter.utils.os.requestPriorityGPS
 import com.google.android.gms.location.Priority
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
-import io.ably.lib.realtime.Channel
 import io.radar.sdk.Radar
 import io.radar.sdk.RadarInitializeOptions
 
@@ -69,20 +68,16 @@ class MainActivity : ComponentActivity() {
                 routeEmitter.onPusherResubscribed()
             }
 
-            val channel: Channel = Ably.realtime.channels.get("ably-channel")
             PusherClient.connectAndSubscribe()
-            channel.subscribe("ably-route") { msg ->
-                Log.d(
-                    "AblyStuff",
-                    "MainActivity received Ably msg: name=${msg.name}, data=${msg.data}"
-                )
-            }
+
             LocationEmitterTheme {
                 Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
                     ButtonScreen(
                         modifier = Modifier.padding(innerPadding),
-                        onStartEmitting = { routeEmitter.start() },
-                        onStopEmitting = { routeEmitter.stop() }
+                        // onStartEmitting = { routeEmitter.start() },
+                        // onStopEmitting = { routeEmitter.stop() }
+                        onStartEmitting = { RadarTrip.start() },
+                        onStopEmitting = { RadarTrip.stop() }
                     )
                 }
             }
