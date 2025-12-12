@@ -189,4 +189,7 @@ dependencies {
 
     // AWS
     implementation(libs.appauth)
+
+    // Google ODRD
+    implementation(libs.google.maps.fleetengine)
 }

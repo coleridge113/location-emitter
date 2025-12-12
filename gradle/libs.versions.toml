@@ -4,6 +4,7 @@ agp = "8.13.1"
 appauth = "0.11.1"
 awsAndroidSdkService = "2.81.1"
 converterGson = "3.0.0"
+googleMapsFleetengine = "latest.release"
 koinAndroid = "4.1.1"
 koinAndroidxCompose = "4.1.1"
 koinCore = "4.1.1"
@@ -36,6 +37,7 @@ aws-android-sdk-service = { module = "com.amazonaws:aws-android-sdk-SERVICE", ve
 firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebaseMessaging" }
 android-sdk = { module = "org.maplibre.gl:android-sdk", version.ref = "androidSdk" }
 android-plugin-annotation-v9 = { module = "org.maplibre.gl:android-plugin-annotation-v9", version.ref = "androidPluginAnnotationV9" }
+google-maps-fleetengine = { module = "com.google.maps:google-maps-fleetengine", version.ref = "googleMapsFleetengine" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocationVersion" }
 ably-java = { module = "io.ably:ably-java", version.ref = "ablyJava" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
