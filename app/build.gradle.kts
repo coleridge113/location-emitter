@@ -25,6 +25,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        manifestPlaceholders["appAuthRedirectScheme"] = "com.metromart.locationemitter"
+
         buildConfigField(
             "String",
             "MAPBOX_ACCESS_TOKEN",
@@ -184,4 +186,7 @@ dependencies {
     // MapLibre
     implementation(libs.android.sdk )
     implementation(libs.android.plugin.annotation.v9)
+
+    // AWS
+    implementation(libs.appauth)
 }

@@ -44,7 +44,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         
         val receiver = MyRadarReceiver()
-
         Radar.initialize(
             this,
             BuildConfig.RADAR_TEST_PUBLISHABLE, 
