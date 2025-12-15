@@ -34,32 +34,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         
-        val receiver = MyRadarReceiver()
-        Radar.initialize(
-            this,
-            BuildConfig.RADAR_TEST_PUBLISHABLE, 
-            RadarInitializeOptions(
-                radarReceiver = receiver, 
-                locationProvider = Radar.RadarLocationServicesProvider.GOOGLE
-            )
-        )
-
         requestLocationPermissions()
         requestPriorityGPS(this) 
 
         setContent {
-            val repository = RepositoryImpl()
-            val routeEmitter = RouteEmitter(
-                context = this,
-                repository = repository
-            )
-
-            PusherClient.onResubscribed = {
-                routeEmitter.onPusherResubscribed()
-            }
-
-            PusherClient.connectAndSubscribe()
-
             LocationEmitterTheme {
                 Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
                     ButtonScreen(
