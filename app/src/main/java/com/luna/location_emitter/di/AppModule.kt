@@ -9,6 +9,8 @@ import com.luna.location_emitter.data.remote.TrackingApi
 import java.util.concurrent.TimeUnit
 import androidx.room.Room
 import com.luna.location_emitter.data.database.AppDatabase
+import com.luna.location_emitter.data.repository.Repository
+import com.luna.location_emitter.data.repository.RepositoryImpl
 import org.koin.android.ext.koin.androidContext
 
 val appModule = module {
@@ -43,5 +45,13 @@ val appModule = module {
             AppDatabase::class.java,
             "location_emitter.db" 
         ).build()
+    }
+
+    single {
+        get<AppDatabase>().locationDao()
+    }
+
+    single<Repository> {
+        RepositoryImpl(get())
     }
 }
