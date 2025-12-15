@@ -2,8 +2,8 @@ package com.luna.location_emitter.utils
 
 import android.util.Log
 import android.content.Context
-import com.luna.location_emitter.data.LocationEntity
-import com.luna.location_emitter.data.Repository
+import com.luna.location_emitter.data.entity.LocationEntity
+import com.luna.location_emitter.data.repository.Repository
 import com.luna.location_emitter.model.LocationData
 import com.pusher.client.connection.ConnectionState
 import kotlinx.coroutines.CoroutineScope

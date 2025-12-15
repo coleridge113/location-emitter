@@ -3,13 +3,11 @@ package com.luna.location_emitter.utils
 import android.content.Context
 import android.util.Log
 import android.location.Location
-import com.luna.location_emitter.data.AppDatabase
-import com.luna.location_emitter.data.LocationEntity
-import com.luna.location_emitter.data.RepositoryImpl
+import com.luna.location_emitter.data.entity.LocationEntity
+import com.luna.location_emitter.data.repository.RepositoryImpl
 import com.pusher.client.connection.ConnectionState
 import io.ably.lib.realtime.Channel
 import io.radar.sdk.Radar
-import io.radar.sdk.RadarTrackingOptions
 import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader

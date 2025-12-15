@@ -1,4 +1,6 @@
-package com.luna.location_emitter.data
+package com.luna.location_emitter.data.repository
+
+import com.luna.location_emitter.data.entity.LocationEntity
 
 interface Repository {
 

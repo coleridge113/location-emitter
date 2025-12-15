@@ -5,8 +5,6 @@ import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.os.Looper
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -15,11 +13,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import androidx.compose.runtime.remember
 import androidx.core.app.ActivityCompat
-import com.google.android.gms.location.LocationRequest
-import com.luna.location_emitter.data.DatabaseProvider
-import com.luna.location_emitter.data.RepositoryImpl
+import com.luna.location_emitter.data.repository.RepositoryImpl
 import com.luna.location_emitter.presentation.ButtonScreen
 import com.luna.location_emitter.ui.theme.LocationEmitterTheme
 import com.luna.location_emitter.utils.PusherClient
@@ -27,10 +22,6 @@ import com.luna.location_emitter.utils.RouteEmitter
 import com.luna.location_emitter.utils.radar.MyRadarReceiver
 import com.luna.location_emitter.utils.radar.RadarTrip
 import com.luna.location_emitter.utils.os.requestPriorityGPS
-import com.google.android.gms.location.Priority
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationResult
 import io.radar.sdk.Radar
 import io.radar.sdk.RadarInitializeOptions
 

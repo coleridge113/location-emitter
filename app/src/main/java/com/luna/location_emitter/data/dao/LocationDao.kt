@@ -1,8 +1,9 @@
-package com.luna.location_emitter.data
+package com.luna.location_emitter.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.luna.location_emitter.data.entity.LocationEntity
 
 @Dao
 interface LocationDao {

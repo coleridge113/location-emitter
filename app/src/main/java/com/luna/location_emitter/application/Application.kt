@@ -1,7 +1,7 @@
 package com.luna.location_emitter.application
 
 import android.app.Application
-import com.luna.location_emitter.data.DatabaseProvider
+import com.luna.location_emitter.data.database.DatabaseProvider
 
 class App : Application() {
     override fun onCreate() {

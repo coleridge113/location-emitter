@@ -1,4 +1,7 @@
-package com.luna.location_emitter.data
+package com.luna.location_emitter.data.repository
+
+import com.luna.location_emitter.data.database.DatabaseProvider
+import com.luna.location_emitter.data.entity.LocationEntity
 
 class RepositoryImpl : Repository {
 

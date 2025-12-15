@@ -1,4 +1,4 @@
-package com.luna.location_emitter.data
+package com.luna.location_emitter.data.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
