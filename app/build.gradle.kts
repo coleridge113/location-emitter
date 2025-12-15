@@ -190,4 +190,5 @@ dependencies {
 
     // AWS
     implementation(libs.appauth)
+    api(libs.aws.iot.device.sdk.android)
 }

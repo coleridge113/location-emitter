@@ -52,10 +52,8 @@ class RouteEmitter(
             return
         }
 
-        Radar.setUserId("metromart-user7")
         publishing = true
         job = scope.launch {
-            // Radar.startTracking(RadarTrackingOptions.CONTINUOUS)
             var idx = 0
             while (isActive && publishing && idx < route.size) {
                 val (lng, lat) = route[idx]
@@ -67,12 +65,6 @@ class RouteEmitter(
                         time = System.currentTimeMillis()
                     }
 
-                    Radar.trackOnce(loc) { status, location, events, user ->
-                        Log.d("Radar", "STATUS: $status")
-                        Log.d("Radar", "LOCATION: $location")
-                        Log.d("Radar", "EVENTS: $events")
-                        Log.d("Radar", "USER: ${user?.userId}")
-                    }
                 } catch (e: Exception) {
                     Log.e(TAG, "Exception while publishing: ${e.message}", e)
                 }
@@ -96,12 +88,6 @@ class RouteEmitter(
         Log.d(TAG, "RouteEmitter.destroy() called")
         stop()
         scope.cancel()
-    }
-
-    fun onPusherResubscribed() {
-        scope.launch {
-            flushOfflineQueueIfNeeded()
-        }
     }
 
     private fun loadRoutePoints(): List<Pair<Double, Double>> {
@@ -164,25 +150,6 @@ class RouteEmitter(
         }
     }
 
-    private suspend fun flushOfflineQueueIfNeeded() {
-        val pending = repository.getLocationData()
-        if (pending.isEmpty()) return
-
-        Log.d("PusherDB", "Flushing ${pending.size} offline records")
-
-        for (entity in pending) {
-            val payload = entityToPayload(entity)
-            try {
-                PusherClient.triggerClientEvent(payload.toString())
-            } catch (e: Exception) {
-                Log.d("PusherDB", "Failed to send offline record seq=${entity.seq}: $e")
-                return
-            }
-        }
-
-        repository.flushDB()
-        Log.d("PusherDB", "Offline records flushed and DB cleared")
-    }
     private fun entityToPayload(entity: LocationEntity): Map<String, Any> {
         return mapOf(
             "type" to entity.type,

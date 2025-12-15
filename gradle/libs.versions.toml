@@ -3,6 +3,7 @@ ablyJava = "1.4.2"
 agp = "8.13.1"
 appauth = "0.11.1"
 awsAndroidSdkService = "2.81.1"
+awsIotDeviceSdkAndroid = "1.29.1"
 converterGson = "3.0.0"
 koinAndroid = "4.1.1"
 koinAndroidxCompose = "4.1.1"
@@ -34,6 +35,7 @@ workRuntimeKtx = "2.11.0"
 [libraries]
 appauth = { module = "net.openid:appauth", version.ref = "appauth" }
 aws-android-sdk-service = { module = "com.amazonaws:aws-android-sdk-SERVICE", version.ref = "awsAndroidSdkService" }
+aws-iot-device-sdk-android = { module = "software.amazon.awssdk.iotdevicesdk:aws-iot-device-sdk-android", version.ref = "awsIotDeviceSdkAndroid" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebaseMessaging" }
 android-sdk = { module = "org.maplibre.gl:android-sdk", version.ref = "androidSdk" }
 android-plugin-annotation-v9 = { module = "org.maplibre.gl:android-plugin-annotation-v9", version.ref = "androidPluginAnnotationV9" }

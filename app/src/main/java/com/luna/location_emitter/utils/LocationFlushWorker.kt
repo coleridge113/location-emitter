@@ -3,6 +3,7 @@ package com.luna.location_emitter.utils
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.luna.location_emitter.data.dto.LocationPayload
 import com.luna.location_emitter.data.remote.TrackingApi
 import com.luna.location_emitter.data.repository.Repository
 
@@ -19,12 +20,12 @@ class LocationFlushWorker(
         if (batch.isEmpty()) return Result.success()
 
         val payload = batch.map {
-            mapOf(
-                "type" to it.type,
-                "seq" to it.seq,
-                "lat" to it.latitude,
-                "lng" to it.longitude,
-                "timestamp" to it.timestamp
+            LocationPayload(
+                type = it.type,
+                seq = it.seq,
+                lat = it.latitude,
+                lng = it.longitude,
+                timestamp = it.timestamp
             )
         }
 
