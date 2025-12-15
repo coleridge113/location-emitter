@@ -7,6 +7,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.luna.location_emitter.data.remote.TrackingApi
 import java.util.concurrent.TimeUnit
+import androidx.room.Room
+import com.luna.location_emitter.data.database.AppDatabase
+import org.koin.android.ext.koin.androidContext
 
 val appModule = module {
     single {
@@ -20,17 +23,25 @@ val appModule = module {
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
             .build()
-        }
+    }
 
     single {
         Retrofit.Builder()
-        .baseUrl("http://10.0.2.2:3000/")
-        .client(get())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+            .baseUrl("http://10.0.2.2:3000/")
+            .client(get())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
     single<TrackingApi> {
         get<Retrofit>().create(TrackingApi::class.java)
+    }
+
+    single {
+        Room.databaseBuilder(
+            androidContext(), 
+            AppDatabase::class.java,
+            "location_emitter.db" 
+        ).build()
     }
 }
