@@ -191,4 +191,6 @@ dependencies {
     // AWS
     implementation(libs.appauth)
     api(libs.aws.iot.device.sdk.android)
+    implementation(libs.aws.android.sdk.core)
+    implementation(libs.aws.android.sdk.cognito)
 }
