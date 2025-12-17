@@ -59,10 +59,6 @@ val appModule = module {
         RepositoryImpl(get())
     }
 
-    single<RouteEmitter> {
-        RouteEmitter(get(), get())
-    }
-    
     single {
         AwsIotConfig(
             identityPoolId = BuildConfig.AWS_COGNITO_POOL_ID,
@@ -71,6 +67,7 @@ val appModule = module {
             deviceId = BuildConfig.DEVICE_ID
         )
     }
+
     single {
         AwsMqttClient(
             context = get(),
@@ -79,5 +76,9 @@ val appModule = module {
             iotEndpoint = get<AwsIotConfig>().iotEndpoint,
             deviceId = get<AwsIotConfig>().deviceId
         )
+    }
+
+    single<RouteEmitter> {
+        RouteEmitter(get(), get(), get())
     }
 }

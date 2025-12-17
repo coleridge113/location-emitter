@@ -4,7 +4,9 @@ import android.content.Context
 import android.util.Log
 import android.location.Location
 import com.luna.location_emitter.data.entity.LocationEntity
-import com.luna.location_emitter.data.repository.RepositoryImpl
+import com.luna.location_emitter.data.repository.Repository
+import com.luna.location_emitter.model.LocationData
+import com.luna.location_emitter.utils.aws.AwsMqttClient
 import com.pusher.client.connection.ConnectionState
 import io.ably.lib.realtime.Channel
 import io.radar.sdk.Radar
@@ -12,34 +14,27 @@ import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-private const val ABLY_CHANNEL_NAME = "ably-channel"
-private const val ABLY_EVENT_NAME = "ably-route"
 
 class RouteEmitter(
     private val context: Context,
-    private val repository: RepositoryImpl
+    private val repository: Repository,
+    private val mqttClient: AwsMqttClient
 ) {
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
-    private val channel: Channel by lazy {
-        Ably.realtime.channels.get(ABLY_CHANNEL_NAME).also { ch ->
-            ch.on { stateChange ->
-                Log.d(
-                    TAG,
-                    "Android Channel[$ABLY_CHANNEL_NAME] state: ${stateChange.previous} -> ${stateChange.current}" +
-                        (stateChange.reason?.let { " reason=${it.message}" } ?: "")
-                )
-            }
-        }
-    }
-    
     private val route: List<Pair<Double, Double>> by lazy { loadRoutePoints() }
 
     @Volatile
     private var publishing: Boolean = false
 
     private var job: Job? = null
+    
+    fun init() {
+        scope.launch {
+            mqttClient.connect()
+        }
+    }
 
     fun start() {
         Log.d(TAG, "RouteEmitter.start() called. publishing=$publishing, routeSize=${route.size}")
@@ -58,12 +53,15 @@ class RouteEmitter(
             while (isActive && publishing && idx < route.size) {
                 val (lng, lat) = route[idx]
                 try {
-                    val loc = Location("mock").apply {
-                        latitude = lat
-                        longitude = lng
-                        accuracy = 5f
-                        time = System.currentTimeMillis()
-                    }
+                    val loc = LocationData(
+                        seq = idx,
+                        type = "Point",
+                        latitude = lat,
+                        longitude = lng,
+                        timestamp = System.currentTimeMillis()
+                    )
+
+                    mqttClient.publish(loc)
 
                 } catch (e: Exception) {
                     Log.e(TAG, "Exception while publishing: ${e.message}", e)

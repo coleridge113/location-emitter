@@ -239,11 +239,7 @@ dependencies {
     implementation(libs.android.plugin.annotation.v9)
 
     // AWS
-    implementation(libs.appauth)
-    api(libs.aws.iot.device.sdk.android)
-    implementation(libs.aws.android.sdk.core)
-    implementation(libs.aws.android.sdk.cognito)
+    implementation(libs.aws.crt.android.v0290)
+    implementation(libs.aws.iot.device.sdk.android.v1180)
     implementation(libs.cognitoidentity)
-    implementation(libs.auth)
-    implementation(libs.org.eclipse.paho.client.mqttv3)
 }

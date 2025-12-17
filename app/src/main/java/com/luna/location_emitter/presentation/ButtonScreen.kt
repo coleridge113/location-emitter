@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
@@ -34,7 +35,10 @@ fun ButtonScreen(
     var enabled by remember { mutableStateOf(false) }
     var externalId by remember { mutableStateOf("") }
     var userId by remember { mutableStateOf("") }
-    
+   
+    LaunchedEffect(Unit) {
+        routeEmitter.init() 
+    }
     LaunchedEffect(enabled) {
         routeEmitter.apply {
             if (enabled) start() else stop()
