@@ -5,6 +5,7 @@ appauth = "0.11.1"
 awsAndroidSdkCognito = "2.20.1"
 awsAndroidSdkService = "2.81.1"
 awsIotDeviceSdkAndroid = "1.29.1"
+cognitoidentity = "2.40.10"
 converterGson = "3.0.0"
 koinAndroid = "4.1.1"
 koinAndroidxCompose = "4.1.1"
@@ -21,6 +22,7 @@ activityCompose = "1.12.0"
 composeBom = "2025.11.01"
 loggingInterceptor = "5.3.2"
 navigationCompose = "2.9.6"
+orgEclipsePahoClientMqttv3 = "1.2.5"
 pusherJavaClient = "2.4.4"
 retrofit = "3.0.0"
 roomRuntime = "2.8.4"
@@ -35,13 +37,16 @@ workRuntimeKtx = "2.11.0"
 
 [libraries]
 appauth = { module = "net.openid:appauth", version.ref = "appauth" }
+auth = { module = "software.amazon.awssdk:auth", version.ref = "cognitoidentity" }
 aws-android-sdk-cognito = { module = "com.amazonaws:aws-android-sdk-cognito", version.ref = "awsAndroidSdkCognito" }
 aws-android-sdk-core = { module = "com.amazonaws:aws-android-sdk-core", version.ref = "awsAndroidSdkService" }
 aws-android-sdk-service = { module = "com.amazonaws:aws-android-sdk-SERVICE", version.ref = "awsAndroidSdkService" }
 aws-iot-device-sdk-android = { module = "software.amazon.awssdk.iotdevicesdk:aws-iot-device-sdk-android", version.ref = "awsIotDeviceSdkAndroid" }
+cognitoidentity = { module = "software.amazon.awssdk:cognitoidentity", version.ref = "cognitoidentity" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebaseMessaging" }
 android-sdk = { module = "org.maplibre.gl:android-sdk", version.ref = "androidSdk" }
 android-plugin-annotation-v9 = { module = "org.maplibre.gl:android-plugin-annotation-v9", version.ref = "androidPluginAnnotationV9" }
+org-eclipse-paho-client-mqttv3 = { module = "org.eclipse.paho:org.eclipse.paho.client.mqttv3", version.ref = "orgEclipsePahoClientMqttv3" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocationVersion" }
 ably-java = { module = "io.ably:ably-java", version.ref = "ablyJava" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

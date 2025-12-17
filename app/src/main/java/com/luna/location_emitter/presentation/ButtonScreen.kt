@@ -13,6 +13,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,17 +22,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import com.luna.location_emitter.utils.RouteEmitter
 import com.luna.location_emitter.utils.radar.RadarTrip
+import org.koin.compose.koinInject
 
 @Composable
 fun ButtonScreen(
     modifier: Modifier,
-    onStartEmitting: () -> Unit,
-    onStopEmitting: () -> Unit
+    routeEmitter: RouteEmitter
 ) {
     var enabled by remember { mutableStateOf(false) }
     var externalId by remember { mutableStateOf("") }
     var userId by remember { mutableStateOf("") }
+    
+    LaunchedEffect(enabled) {
+        routeEmitter.apply {
+            if (enabled) start() else stop()
+        }
+    }
 
     Column(
         modifier = modifier
@@ -43,14 +51,7 @@ fun ButtonScreen(
         DataInput()
         EnableButton(
             enabled = enabled,
-            onToggle = {
-                enabled = !enabled
-                if (enabled) {
-                    onStartEmitting()
-                } else {
-                    onStopEmitting()
-                }
-            }
+            onToggle = { enabled = !enabled }
         )
 
         Text(

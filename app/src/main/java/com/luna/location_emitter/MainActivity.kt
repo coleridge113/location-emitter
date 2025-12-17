@@ -47,13 +47,14 @@ class MainActivity : ComponentActivity() {
         requestLocationPermissions()
         requestPriorityGPS(this) 
 
+
         setContent {
+            val routeEmitter: RouteEmitter by inject()
             LocationEmitterTheme {
                 Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
                     ButtonScreen(
                         modifier = Modifier.padding(innerPadding),
-                        onStartEmitting = { routeEmitter.start() },
-                        onStopEmitting = { routeEmitter.stop() }
+                        routeEmitter = routeEmitter
                     )
                 }
             }

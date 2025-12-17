@@ -18,7 +18,7 @@ android {
 
     defaultConfig {
         applicationId = "com.luna.location_emitter"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -77,6 +77,46 @@ android {
             "RADAR_TEST_PUBLISHABLE",
             "\"${localProps["RADAR_TEST_PUBLISHABLE"]}\""
         )
+        buildConfigField(
+            "String",
+            "AWS_IOT_ENDPOINT",
+            "\"${localProps["AWS_IOT_ENDPOINT"]}\""
+        )
+        buildConfigField(
+            "String",
+            "AWS_IOT_ENDPOINT",
+            "\"${localProps["AWS_IOT_ENDPOINT"]}\""
+        )
+        buildConfigField(
+            "String",
+            "AWS_REGION",
+            "\"${localProps["AWS_REGION"]}\""
+        )
+        buildConfigField(
+            "String",
+            "AWS_ACCESS_KEY_ID",
+            "\"${localProps["AWS_ACCESS_KEY_ID"]}\""
+        )
+        buildConfigField(
+            "String",
+            "AWS_SECRET_ACCESS_KEY",
+            "\"${localProps["AWS_SECRET_ACCESS_KEY"]}\""
+        )
+        buildConfigField(
+            "String",
+            "AWS_KEY_ID",
+            "\"${localProps["AWS_KEY_ID"]}\""
+        )
+        buildConfigField(
+            "String",
+            "DEVICE_ID",
+            "\"${localProps["DEVICE_ID"]}\""
+        )
+        buildConfigField(
+            "String",
+            "AWS_COGNITO_POOL_ID",
+            "\"${localProps["AWS_COGNITO_POOL_ID"]}\""
+        )
     }
 
     flavorDimensions += "environment"
@@ -122,6 +162,16 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+    }
+
+    packaging {
+        resources {
+            excludes += listOf(
+                "META-INF/INDEX.LIST", 
+                "META-INF/io.netty.versions.properties",
+                "META-INF/DEPENDENCIES"
+            )
+        }
     }
 }
 
@@ -193,4 +243,7 @@ dependencies {
     api(libs.aws.iot.device.sdk.android)
     implementation(libs.aws.android.sdk.core)
     implementation(libs.aws.android.sdk.cognito)
+    implementation(libs.cognitoidentity)
+    implementation(libs.auth)
+    implementation(libs.org.eclipse.paho.client.mqttv3)
 }

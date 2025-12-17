@@ -8,9 +8,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import com.luna.location_emitter.data.remote.TrackingApi
 import java.util.concurrent.TimeUnit
 import androidx.room.Room
+import com.luna.location_emitter.BuildConfig
 import com.luna.location_emitter.data.database.AppDatabase
 import com.luna.location_emitter.data.repository.Repository
 import com.luna.location_emitter.data.repository.RepositoryImpl
+import com.luna.location_emitter.utils.aws.AwsMqttClient
+import com.luna.location_emitter.model.AwsIotConfig
+import com.luna.location_emitter.utils.RouteEmitter
 import org.koin.android.ext.koin.androidContext
 
 val appModule = module {
@@ -53,5 +57,27 @@ val appModule = module {
 
     single<Repository> {
         RepositoryImpl(get())
+    }
+
+    single<RouteEmitter> {
+        RouteEmitter(get(), get())
+    }
+    
+    single {
+        AwsIotConfig(
+            identityPoolId = BuildConfig.AWS_COGNITO_POOL_ID,
+            region = BuildConfig.AWS_REGION,
+            iotEndpoint = BuildConfig.AWS_IOT_ENDPOINT,
+            deviceId = BuildConfig.DEVICE_ID
+        )
+    }
+    single {
+        AwsMqttClient(
+            context = get(),
+            identityPoolId = get<AwsIotConfig>().identityPoolId,
+            region = get<AwsIotConfig>().region,
+            iotEndpoint = get<AwsIotConfig>().iotEndpoint,
+            deviceId = get<AwsIotConfig>().deviceId
+        )
     }
 }
